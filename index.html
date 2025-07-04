@@ -14,7 +14,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #f0f2f5;
         }
-        .sidebar-icon {
+        .sidebar-icon, .mobile-nav-icon {
             width: 24px;
             height: 24px;
         }
@@ -31,8 +31,33 @@
             background-color: #4f46e5; /* indigo-600 */
             color: white;
         }
-        .sidebar-link {
+        .sidebar-link, .mobile-nav-link {
              transition: all 0.2s ease-in-out;
+        }
+        .mobile-nav-link.active {
+            color: #4f46e5; /* indigo-600 */
+        }
+        .mobile-nav-link.active span {
+            font-weight: 700;
+        }
+        .gemini-modal {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #4f46e5;
+            animation: spin 1s ease infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -40,7 +65,7 @@
 
     <div class="p-4 md:p-8">
         <div class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Thiết kế Giao diện PSI</h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Demo hệ thống PSI</h1>
             <p class="text-gray-600 mt-2">Mọi hành trình, một chạm là đổ</p>
             <div class="mt-6 bg-white p-2 rounded-full shadow-md inline-flex space-x-1">
                 <button id="showAdminBtn" class="px-6 py-2 rounded-full bg-indigo-600 text-white font-semibold shadow">Admin Web App</button>
@@ -50,7 +75,7 @@
 
         <!-- Giao diện Admin Web App -->
         <div id="adminView" class="w-full max-w-screen-2xl mx-auto">
-            <div class="flex h-screen bg-gray-50 overflow-hidden rounded-xl shadow-2xl">
+             <div class="flex h-screen bg-gray-50 overflow-hidden rounded-xl shadow-2xl">
                 <!-- Sidebar -->
                 <div class="hidden md:flex flex-col w-64 bg-white">
                     <div class="flex items-center justify-center h-20 border-b">
@@ -84,261 +109,59 @@
                     </nav>
                 </div>
 
-                <!-- Main content -->
+                <!-- Main content (Admin) -->
                 <div class="flex-1 flex flex-col overflow-hidden">
-                    <!-- Header -->
                     <header class="flex justify-between items-center p-6 bg-white border-b">
                         <h2 id="main-header" class="text-2xl font-bold text-gray-800">Bảng điều khiển</h2>
                         <div class="flex items-center space-x-4">
-                            <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">
-                                + Nạp tiền
-                            </button>
-                            <div class="flex items-center">
-                                <span class="font-semibold mr-2">Công ty ABC</span>
-                                <img class="h-10 w-10 rounded-full object-cover" src="https://placehold.co/100x100/E2E8F0/4A5568?text=A" alt="Avatar">
-                            </div>
+                            <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Nạp tiền</button>
+                            <div class="flex items-center"><span class="font-semibold mr-2">Công ty ABC</span><img class="h-10 w-10 rounded-full object-cover" src="https://placehold.co/100x100/E2E8F0/4A5568?text=A" alt="Avatar"></div>
                         </div>
                     </header>
-                    
-                    <!-- Content area -->
                     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-6">
-                        
                         <!-- View: Dashboard -->
                         <div id="dashboardView" class="main-view">
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                <div class="bg-white p-6 rounded-lg shadow">
-                                    <h3 class="text-sm font-medium text-gray-500">Số dư tài khoản</h3>
-                                    <p class="mt-2 text-3xl font-bold text-gray-900">1,250,000,000 ₫</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow">
-                                    <h3 class="text-sm font-medium text-gray-500">Chi tiêu tháng này</h3>
-                                    <p class="mt-2 text-3xl font-bold text-gray-900">89,560,000 ₫</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow">
-                                    <h3 class="text-sm font-medium text-gray-500">Tiết kiệm (Cashback)</h3>
-                                    <p class="mt-2 text-3xl font-bold text-green-600">895,600 ₫</p>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow">
-                                    <h3 class="text-sm font-medium text-gray-500">Tổng số giao dịch</h3>
-                                    <p class="mt-2 text-3xl font-bold text-gray-900">152</p>
-                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow"><h3 class="text-sm font-medium text-gray-500">Số dư tài khoản</h3><p class="mt-2 text-3xl font-bold text-gray-900">1,250,000,000 ₫</p></div>
+                                <div class="bg-white p-6 rounded-lg shadow"><h3 class="text-sm font-medium text-gray-500">Chi tiêu tháng này</h3><p class="mt-2 text-3xl font-bold text-gray-900">89,560,000 ₫</p></div>
+                                <div class="bg-white p-6 rounded-lg shadow"><h3 class="text-sm font-medium text-gray-500">Tiết kiệm (Cashback)</h3><p class="mt-2 text-3xl font-bold text-green-600">895,600 ₫</p></div>
+                                <div class="bg-white p-6 rounded-lg shadow"><h3 class="text-sm font-medium text-gray-500">Tổng số giao dịch</h3><p class="mt-2 text-3xl font-bold text-gray-900">152</p></div>
                             </div>
                             <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
                                 <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow">
-                                    <h3 class="font-semibold text-gray-800">Tổng quan chi tiêu 7 ngày qua</h3>
-                                    <canvas id="spendingChart"></canvas>
+                                    <h3 class="font-semibold text-gray-800">Cơ cấu chi tiêu theo bộ phận</h3>
+                                    <div class="h-80"><canvas id="spendingChart"></canvas></div>
                                 </div>
                                 <div class="bg-white p-6 rounded-lg shadow">
                                     <h3 class="font-semibold text-gray-800">Giao dịch gần đây</h3>
                                     <ul class="mt-4 space-y-4">
-                                        <li class="flex items-center">
-                                            <div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
-                                            <div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Nguyễn Văn An</p><p class="text-sm text-gray-500">Xe 51F-123.45</p></div>
-                                            <div class="text-right"><p class="font-bold text-gray-900">500,000 ₫</p><p class="text-sm text-gray-500">15 phút trước</p></div>
-                                        </li>
-                                         <li class="flex items-center">
-                                            <div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
-                                            <div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Trần Thị Bích</p><p class="text-sm text-gray-500">Xe 29A-987.65</p></div>
-                                            <div class="text-right"><p class="font-bold text-gray-900">750,000 ₫</p><p class="text-sm text-gray-500">1 giờ trước</p></div>
-                                        </li>
-                                         <li class="flex items-center">
-                                            <div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
-                                            <div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Lê Minh Cường</p><p class="text-sm text-gray-500">Xe 72C-456.78</p></div>
-                                            <div class="text-right"><p class="font-bold text-gray-900">1,200,000 ₫</p><p class="text-sm text-gray-500">3 giờ trước</p></div>
-                                        </li>
+                                        <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Nguyễn Văn An</p><p class="text-sm text-gray-500">Xe 51F-123.45</p></div><div class="text-right"><p class="font-bold text-gray-900">500,000 ₫</p><p class="text-sm text-gray-500">15 phút trước</p></div></li>
+                                        <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Trần Thị Bích</p><p class="text-sm text-gray-500">Xe 29A-987.65</p></div><div class="text-right"><p class="font-bold text-gray-900">750,000 ₫</p><p class="text-sm text-gray-500">1 giờ trước</p></div></li>
+                                        <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Lê Minh Cường</p><p class="text-sm text-gray-500">Xe 72C-456.78</p></div><div class="text-right"><p class="font-bold text-gray-900">1,200,000 ₫</p><p class="text-sm text-gray-500">3 giờ trước</p></div></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
                         <!-- View: Transactions -->
-                        <div id="transactionsView" class="main-view hidden">
-                            <div class="bg-white p-6 rounded-lg shadow">
-                                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
-                                    <div class="relative w-full md:w-1/3">
-                                        <input type="text" placeholder="Tìm kiếm giao dịch..." class="w-full pl-10 pr-4 py-2 border rounded-lg">
-                                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                    </div>
-                                    <div class="flex items-center gap-4">
-                                        <input type="date" class="border rounded-lg px-4 py-2">
-                                        <button class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300">Bộ lọc</button>
-                                    </div>
-                                </div>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-sm text-left text-gray-500">
-                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3">ID Giao dịch</th>
-                                                <th scope="col" class="px-6 py-3">Thời gian</th>
-                                                <th scope="col" class="px-6 py-3">Tài xế & Xe</th>
-                                                <th scope="col" class="px-6 py-3">Trạm xăng</th>
-                                                <th scope="col" class="px-6 py-3">Số tiền</th>
-                                                <th scope="col" class="px-6 py-3">Trạng thái</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">PSI-12345</td>
-                                                <td class="px-6 py-4">03/07/2025 20:15</td>
-                                                <td class="px-6 py-4">Nguyễn Văn An<br><span class="text-gray-400">51F-123.45</span></td>
-                                                <td class="px-6 py-4">Petrolimex số 10</td>
-                                                <td class="px-6 py-4 font-bold">500,000 ₫</td>
-                                                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Thành công</span></td>
-                                            </tr>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">PSI-12344</td>
-                                                <td class="px-6 py-4">03/07/2025 19:30</td>
-                                                <td class="px-6 py-4">Trần Thị Bích<br><span class="text-gray-400">29A-987.65</span></td>
-                                                <td class="px-6 py-4">PVOIL Cống Quỳnh</td>
-                                                <td class="px-6 py-4 font-bold">750,000 ₫</td>
-                                                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Thành công</span></td>
-                                            </tr>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">PSI-12343</td>
-                                                <td class="px-6 py-4">03/07/2025 17:05</td>
-                                                <td class="px-6 py-4">Lê Minh Cường<br><span class="text-gray-400">72C-456.78</span></td>
-                                                <td class="px-6 py-4">Comeco Hàng Xanh</td>
-                                                <td class="px-6 py-4 font-bold">1,200,000 ₫</td>
-                                                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Thất bại</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-
+                        <div id="transactionsView" class="main-view hidden"><div class="bg-white p-6 rounded-lg shadow"><div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4"><div class="relative w-full md:w-1/3"><input type="text" placeholder="Tìm kiếm giao dịch..." class="w-full pl-10 pr-4 py-2 border rounded-lg"><svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div><div class="flex items-center gap-4"><input type="date" class="border rounded-lg px-4 py-2"><button class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300">Bộ lọc</button></div></div><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">ID Giao dịch</th><th scope="col" class="px-6 py-3">Thời gian</th><th scope="col" class="px-6 py-3">Tài xế & Xe</th><th scope="col" class="px-6 py-3">Trạm xăng</th><th scope="col" class="px-6 py-3">Số tiền</th><th scope="col" class="px-6 py-3">Trạng thái</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">PSI-12345</td><td class="px-6 py-4">03/07/2025 20:15</td><td class="px-6 py-4">Nguyễn Văn An<br><span class="text-gray-400">51F-123.45</span></td><td class="px-6 py-4">Petrolimex số 10</td><td class="px-6 py-4 font-bold">500,000 ₫</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Thành công</span></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">PSI-12344</td><td class="px-6 py-4">03/07/2025 19:30</td><td class="px-6 py-4">Trần Thị Bích<br><span class="text-gray-400">29A-987.65</span></td><td class="px-6 py-4">PVOIL Cống Quỳnh</td><td class="px-6 py-4 font-bold">750,000 ₫</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Thành công</span></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">PSI-12343</td><td class="px-6 py-4">03/07/2025 17:05</td><td class="px-6 py-4">Lê Minh Cường<br><span class="text-gray-400">72C-456.78</span></td><td class="px-6 py-4">Comeco Hàng Xanh</td><td class="px-6 py-4 font-bold">1,200,000 ₫</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Thất bại</span></td></tr></tbody></table></div></div></div>
                         <!-- View: Fleet Management -->
-                        <div id="fleetView" class="main-view hidden">
-                            <div class="flex justify-end mb-4">
-                                <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Thêm mới</button>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg shadow">
-                                <h3 class="text-xl font-bold mb-4">Quản lý Tài xế</h3>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-sm text-left text-gray-500">
-                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3">Tên tài xế</th>
-                                                <th scope="col" class="px-6 py-3">Thông tin liên hệ</th>
-                                                <th scope="col" class="px-6 py-3">Phương tiện phụ trách</th>
-                                                <th scope="col" class="px-6 py-3">Trạng thái</th>
-                                                <th scope="col" class="px-6 py-3">Hành động</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">Nguyễn Văn An</td>
-                                                <td class="px-6 py-4">0901234567<br><span class="text-gray-400">an.nguyen@email.com</span></td>
-                                                <td class="px-6 py-4">51F-123.45</td>
-                                                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Hoạt động</span></td>
-                                                <td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td>
-                                            </tr>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">Trần Thị Bích</td>
-                                                <td class="px-6 py-4">0987654321<br><span class="text-gray-400">bich.tran@email.com</span></td>
-                                                <td class="px-6 py-4">29A-987.65</td>
-                                                <td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Tạm khóa</span></td>
-                                                <td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        
+                        <div id="fleetView" class="main-view hidden"><div class="flex justify-end mb-4"><button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Thêm mới</button></div><div class="bg-white p-6 rounded-lg shadow"><h3 class="text-xl font-bold mb-4">Quản lý Tài xế</h3><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">Tên tài xế</th><th scope="col" class="px-6 py-3">Thông tin liên hệ</th><th scope="col" class="px-6 py-3">Phương tiện phụ trách</th><th scope="col" class="px-6 py-3">Trạng thái</th><th scope="col" class="px-6 py-3">Hành động</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">Nguyễn Văn An</td><td class="px-6 py-4">0901234567<br><span class="text-gray-400">an.nguyen@email.com</span></td><td class="px-6 py-4">51F-123.45</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Hoạt động</span></td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">Trần Thị Bích</td><td class="px-6 py-4">0987654321<br><span class="text-gray-400">bich.tran@email.com</span></td><td class="px-6 py-4">29A-987.65</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Tạm khóa</span></td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr></tbody></table></div></div></div>
                         <!-- View: Policy -->
-                        <div id="policyView" class="main-view hidden">
-                             <div class="flex justify-end mb-4">
-                                <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Tạo chính sách mới</button>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                <div class="bg-white p-6 rounded-lg shadow border-l-4 border-indigo-500">
-                                    <h4 class="font-bold text-lg">Chính sách đội Sales</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Áp dụng cho 5 tài xế</p>
-                                    <div class="mt-4 space-y-2">
-                                        <p class="text-sm"><span class="font-semibold">Hạn mức:</span> 5,000,000 ₫ / tuần</p>
-                                        <p class="text-sm"><span class="font-semibold">Thời gian:</span> T2 - T6, 8h - 18h</p>
-                                        <p class="text-sm"><span class="font-semibold">Loại xăng:</span> Ron 95</p>
-                                    </div>
-                                    <div class="mt-4 pt-4 border-t flex justify-end gap-2">
-                                        <a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a>
-                                        <a href="#" class="font-medium text-red-600 hover:underline">Xóa</a>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
-                                    <h4 class="font-bold text-lg">Chính sách Giao hàng</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Áp dụng cho 12 tài xế</p>
-                                    <div class="mt-4 space-y-2">
-                                        <p class="text-sm"><span class="font-semibold">Hạn mức:</span> 150 lít dầu / tháng</p>
-                                        <p class="text-sm"><span class="font-semibold">Thời gian:</span> Tất cả các ngày</p>
-                                        <p class="text-sm"><span class="font-semibold">Trạm xăng:</span> Petrolimex, PVOIL</p>
-                                    </div>
-                                    <div class="mt-4 pt-4 border-t flex justify-end gap-2">
-                                        <a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a>
-                                        <a href="#" class="font-medium text-red-600 hover:underline">Xóa</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
+                        <div id="policyView" class="main-view hidden"><div class="flex justify-end mb-4"><button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Tạo chính sách mới</button></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="bg-white p-6 rounded-lg shadow border-l-4 border-indigo-500"><h4 class="font-bold text-lg">Chính sách đội Sales</h4><p class="text-sm text-gray-500 mt-2">Áp dụng cho 5 tài xế</p><div class="mt-4 space-y-2"><p class="text-sm"><span class="font-semibold">Hạn mức:</span> 5,000,000 ₫ / tuần</p><p class="text-sm"><span class="font-semibold">Thời gian:</span> T2 - T6, 8h - 18h</p><p class="text-sm"><span class="font-semibold">Loại xăng:</span> Ron 95</p></div><div class="mt-4 pt-4 border-t flex justify-end gap-2"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a><a href="#" class="font-medium text-red-600 hover:underline">Xóa</a></div></div><div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500"><h4 class="font-bold text-lg">Chính sách Giao hàng</h4><p class="text-sm text-gray-500 mt-2">Áp dụng cho 12 tài xế</p><div class="mt-4 space-y-2"><p class="text-sm"><span class="font-semibold">Hạn mức:</span> 150 lít dầu / tháng</p><p class="text-sm"><span class="font-semibold">Thời gian:</span> Tất cả các ngày</p><p class="text-sm"><span class="font-semibold">Trạm xăng:</span> Petrolimex, PVOIL</p></div><div class="mt-4 pt-4 border-t flex justify-end gap-2"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a><a href="#" class="font-medium text-red-600 hover:underline">Xóa</a></div></div></div></div>
                         <!-- View: Invoices -->
-                        <div id="invoiceView" class="main-view hidden">
-                            <div class="bg-white p-6 rounded-lg shadow">
-                                <h3 class="text-xl font-bold mb-4">Hóa đơn điện tử</h3>
-                                <div class="overflow-x-auto">
-                                    <table class="w-full text-sm text-left text-gray-500">
-                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
-                                            <tr>
-                                                <th scope="col" class="px-6 py-3">Mã hóa đơn</th>
-                                                <th scope="col" class="px-6 py-3">Kỳ hóa đơn</th>
-                                                <th scope="col" class="px-6 py-3">Ngày phát hành</th>
-                                                <th scope="col" class="px-6 py-3">Tổng tiền</th>
-                                                <th scope="col" class="px-6 py-3">Hành động</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">HD-202506-001</td>
-                                                <td class="px-6 py-4">Tháng 06/2025</td>
-                                                <td class="px-6 py-4">01/07/2025</td>
-                                                <td class="px-6 py-4 font-bold">125,340,000 ₫</td>
-                                                <td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Tải về (PDF)</a></td>
-                                            </tr>
-                                            <tr class="bg-white border-b">
-                                                <td class="px-6 py-4 font-medium text-gray-900">HD-202505-001</td>
-                                                <td class="px-6 py-4">Tháng 05/2025</td>
-                                                <td class="px-6 py-4">01/06/2025</td>
-                                                <td class="px-6 py-4 font-bold">110,800,000 ₫</td>
-                                                <td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Tải về (PDF)</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        
+                        <div id="invoiceView" class="main-view hidden"><div class="bg-white p-6 rounded-lg shadow"><h3 class="text-xl font-bold mb-4">Hóa đơn điện tử</h3><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">Mã hóa đơn</th><th scope="col" class="px-6 py-3">Kỳ hóa đơn</th><th scope="col" class="px-6 py-3">Ngày phát hành</th><th scope="col" class="px-6 py-3">Tổng tiền</th><th scope="col" class="px-6 py-3">Hành động</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">HD-202506-001</td><td class="px-6 py-4">Tháng 06/2025</td><td class="px-6 py-4">01/07/2025</td><td class="px-6 py-4 font-bold">125,340,000 ₫</td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Tải về (PDF)</a></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">HD-202505-001</td><td class="px-6 py-4">Tháng 05/2025</td><td class="px-6 py-4">01/06/2025</td><td class="px-6 py-4 font-bold">110,800,000 ₫</td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Tải về (PDF)</a></td></tr></tbody></table></div></div></div>
                         <!-- View: Reports -->
                         <div id="reportView" class="main-view hidden">
-                            <h3 class="text-xl font-bold mb-4">Tạo báo cáo</h3>
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-bold">Tạo báo cáo</h3>
+                                <button id="analyzeWithAIBtn" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:from-purple-600 hover:to-indigo-700 transition duration-300">✨ Phân tích với AI</button>
+                            </div>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                                    <h4 class="font-bold text-lg">Báo cáo tổng hợp chi tiêu</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Xem tổng quan chi tiêu theo phòng ban, theo thời gian.</p>
-                                    <button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                                    <h4 class="font-bold text-lg">Báo cáo theo tài xế</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Phân tích chi tiết chi tiêu của từng tài xế hoặc một nhóm tài xế.</p>
-                                    <button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-                                    <h4 class="font-bold text-lg">Báo cáo hiệu suất nhiên liệu</h4>
-                                    <p class="text-sm text-gray-500 mt-2">Theo dõi mức tiêu thụ km/lít của từng phương tiện (cần tích hợp dữ liệu).</p>
-                                    <button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button>
-                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"><h4 class="font-bold text-lg">Báo cáo tổng hợp chi tiêu</h4><p class="text-sm text-gray-500 mt-2">Xem tổng quan chi tiêu theo phòng ban, theo thời gian.</p><button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button></div>
+                                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"><h4 class="font-bold text-lg">Báo cáo theo tài xế</h4><p class="text-sm text-gray-500 mt-2">Phân tích chi tiết chi tiêu của từng tài xế hoặc một nhóm tài xế.</p><button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button></div>
+                                <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"><h4 class="font-bold text-lg">Báo cáo hiệu suất nhiên liệu</h4><p class="text-sm text-gray-500 mt-2">Theo dõi mức tiêu thụ km/lít của từng phương tiện (cần tích hợp dữ liệu).</p><button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button></div>
                             </div>
                         </div>
-
                     </main>
                 </div>
             </div>
@@ -346,38 +169,244 @@
 
         <!-- Giao diện Driver Mobile App -->
         <div id="driverView" class="hidden flex justify-center items-start pt-10 mobile-app-container">
-            <!-- Nội dung mobile app giữ nguyên -->
-             <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl p-4 flex flex-col border-8 border-black">
-                <div class="w-32 h-6 bg-black rounded-b-xl mx-auto mb-4"></div>
-                <div class="flex-1 flex flex-col">
-                    <div class="p-4"><p class="text-gray-500">Xin chào,</p><h2 class="text-2xl font-bold text-gray-900">Nguyễn Văn An</h2></div>
-                    <div class="p-6 mx-4 bg-indigo-600 text-white rounded-2xl shadow-lg flex flex-col items-center">
-                        <p class="text-sm font-medium text-indigo-200">Hạn mức tuần này còn lại</p>
-                        <p class="text-4xl font-extrabold my-3">850,000 <span class="text-2xl font-semibold">₫</span></p>
-                        <div class="w-full bg-indigo-500 rounded-full h-2.5 mt-2"><div class="bg-white rounded-full h-2.5" style="width: 42.5%"></div></div>
-                        <p class="text-xs text-indigo-200 mt-2">trên tổng 2,000,000 ₫</p>
-                    </div>
-                    <div class="flex-grow flex items-center justify-center">
-                        <button class="w-48 h-48 bg-indigo-600 rounded-full flex flex-col items-center justify-center text-white shadow-2xl hover:bg-indigo-700 transition duration-300">
-                            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                            <span class="text-2xl font-bold mt-2">QUÉT MÃ</span>
-                        </button>
-                    </div>
-                    <div class="w-full bg-white rounded-b-[32px] p-2 mt-auto">
-                        <div class="flex justify-around items-center h-16">
-                             <a href="#" class="text-center text-indigo-600"><svg class="w-7 h-7 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span class="text-xs font-bold">Trang chủ</span></a>
-                             <a href="#" class="text-center text-gray-400 hover:text-indigo-600"><svg class="w-7 h-7 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="text-xs">Lịch sử</span></a>
-                            <a href="#" class="text-center text-gray-400 hover:text-indigo-600"><svg class="w-7 h-7 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="text-xs">Bản đồ</span></a>
-                            <a href="#" class="text-center text-gray-400 hover:text-indigo-600"><svg class="w-7 h-7 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="text-xs">Tài khoản</span></a>
+            <div class="w-full max-w-sm h-[800px] bg-gray-50 rounded-[40px] shadow-2xl p-1 flex flex-col border-8 border-black overflow-hidden">
+                <div class="w-32 h-6 bg-black rounded-b-xl mx-auto mt-2 flex-shrink-0"></div>
+                
+                <div class="flex-1 flex flex-col relative">
+                    <!-- Screen: Home -->
+                    <div id="driverHomeView" class="mobile-screen absolute inset-0 flex flex-col p-4">
+                        <div class="flex-shrink-0"><p class="text-gray-500">Xin chào,</p><h2 class="text-2xl font-bold text-gray-900">Nguyễn Văn An</h2></div>
+                        <div class="p-6 my-6 bg-indigo-600 text-white rounded-2xl shadow-lg flex flex-col items-center flex-shrink-0">
+                            <p class="text-sm font-medium text-indigo-200">Hạn mức tuần này còn lại</p>
+                            <p class="text-4xl font-extrabold my-3">850,000 <span class="text-2xl font-semibold">₫</span></p>
+                            <div class="w-full bg-indigo-500 rounded-full h-2.5 mt-2"><div class="bg-white rounded-full h-2.5" style="width: 42.5%"></div></div>
+                            <p class="text-xs text-indigo-200 mt-2">trên tổng 2,000,000 ₫</p>
                         </div>
+                        <div class="flex-grow flex items-center justify-center">
+                            <button id="scanQrBtn" class="w-48 h-48 bg-indigo-600 rounded-full flex flex-col items-center justify-center text-white shadow-2xl hover:bg-indigo-700 transition duration-300">
+                                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                                <span class="text-2xl font-bold mt-2">QUÉT MÃ</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Screen: History -->
+                    <div id="driverHistoryView" class="mobile-screen absolute inset-0 flex flex-col p-4 hidden">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Lịch sử giao dịch</h2>
+                        <div class="flex-1 overflow-y-auto space-y-4">
+                            <div class="bg-white p-4 rounded-xl shadow-sm"><p class="text-sm font-semibold text-gray-500 mb-2">Hôm nay, 04/07/2025</p><div class="flex items-center"><div class="p-2 rounded-full bg-green-100"><svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-3 flex-1"><p class="font-semibold">Petrolimex số 10</p><p class="text-xs text-gray-400">20:15</p></div><p class="font-bold text-green-600">-500,000 ₫</p></div></div>
+                            <div class="bg-white p-4 rounded-xl shadow-sm"><p class="text-sm font-semibold text-gray-500 mb-2">Hôm qua, 03/07/2025</p><div class="flex items-center mb-3"><div class="p-2 rounded-full bg-green-100"><svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-3 flex-1"><p class="font-semibold">PVOIL Cống Quỳnh</p><p class="text-xs text-gray-400">19:30</p></div><p class="font-bold text-green-600">-750,000 ₫</p></div><div class="flex items-center"><div class="p-2 rounded-full bg-red-100"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div><div class="ml-3 flex-1"><p class="font-semibold">Comeco Hàng Xanh</p><p class="text-xs text-gray-400">17:05</p></div><p class="font-bold text-red-600">Thất bại</p></div></div>
+                        </div>
+                    </div>
+
+                    <!-- Screen: Map -->
+                    <div id="driverMapView" class="mobile-screen absolute inset-0 flex flex-col hidden">
+                         <h2 class="text-2xl font-bold text-gray-900 p-4 pb-0 flex-shrink-0">Trạm xăng gần bạn</h2>
+                         <button id="suggestRouteBtn" class="m-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow flex items-center justify-center gap-2">✨ Gợi ý Lộ trình Thông minh</button>
+                         <div class="flex-1 bg-gray-300 rounded-lg relative mx-4 mb-4">
+                            <img src="https://placehold.co/400x700/e2e8f0/4a5568?text=Bản đồ" class="w-full h-full object-cover rounded-lg" alt="Bản đồ các trạm xăng">
+                            <div class="absolute top-1/4 left-1/4"><div class="w-8 h-8 bg-indigo-600 rounded-full border-2 border-white flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div></div>
+                            <div class="absolute top-1/2 right-1/3"><div class="w-8 h-8 bg-indigo-600 rounded-full border-2 border-white flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div></div>
+                         </div>
+                    </div>
+
+                    <!-- Screen: Account -->
+                    <div id="driverAccountView" class="mobile-screen absolute inset-0 flex flex-col p-4 hidden">
+                        <div class="flex items-center gap-4 mb-8 flex-shrink-0"><img class="h-16 w-16 rounded-full object-cover" src="https://placehold.co/100x100/E2E8F0/4A5568?text=A" alt="Avatar"><div><h2 class="text-2xl font-bold text-gray-900">Nguyễn Văn An</h2><p class="text-gray-500">0901234567</p></div></div>
+                        <div class="flex-1 space-y-2">
+                             <a href="#" class="flex items-center bg-white p-4 rounded-lg shadow-sm"><svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="ml-4 font-semibold">Thông tin cá nhân</span></a>
+                             <a href="#" class="flex items-center bg-white p-4 rounded-lg shadow-sm"><svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg><span class="ml-4 font-semibold">Bảo mật</span></a>
+                             <a href="#" class="flex items-center bg-white p-4 rounded-lg shadow-sm"><svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span class="ml-4 font-semibold">Cài đặt thông báo</span></a>
+                             <a href="#" class="flex items-center bg-white p-4 rounded-lg shadow-sm text-red-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg><span class="ml-4 font-semibold">Đăng xuất</span></a>
+                        </div>
+                    </div>
+
+                    <!-- Screen: Scan QR -->
+                    <div id="driverScanView" class="mobile-screen absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center hidden"><div class="w-64 h-64 border-4 border-dashed border-white rounded-lg"></div><p class="text-white text-lg mt-4">Di chuyển camera đến mã QR</p><button id="simulateScanBtn" class="mt-8 bg-white text-black font-bold py-2 px-6 rounded-lg">Simulate Scan</button><button id="cancelScanBtn" class="absolute top-8 right-8 text-white"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div>
+                    <!-- Screen: Confirm Payment -->
+                    <div id="driverConfirmView" class="mobile-screen absolute inset-0 flex flex-col p-6 bg-gray-50 hidden"><h2 class="text-2xl font-bold text-center text-gray-900">Xác nhận Thanh toán</h2><div class="my-auto text-center"><p class="text-gray-500">Số tiền thanh toán</p><p class="text-6xl font-bold text-indigo-600 my-2">500,000<span class="text-3xl">₫</span></p><p class="font-semibold">Tại: Petrolimex số 10</p></div><button id="confirmPaymentBtn" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg">Xác nhận</button><button id="cancelPaymentBtn" class="w-full text-gray-500 font-bold py-4 mt-2">Hủy</button></div>
+                    <!-- Screen: Success -->
+                    <div id="driverSuccessView" class="mobile-screen absolute inset-0 flex flex-col p-6 bg-green-500 text-white hidden"><div class="my-auto text-center"><div class="w-24 h-24 bg-white bg-opacity-20 rounded-full mx-auto flex items-center justify-center"><svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><h2 class="text-3xl font-bold mt-6">Thanh toán thành công!</h2><p class="text-5xl font-bold my-4">500,000<span class="text-2xl">₫</span></p><p class="bg-white bg-opacity-20 px-4 py-2 rounded-lg inline-block">Tại: Petrolimex số 10</p></div><button id="doneBtn" class="w-full bg-white text-green-600 font-bold py-4 rounded-xl mt-auto">Hoàn tất</button></div>
+                </div>
+
+                <!-- Bottom Nav -->
+                <div id="mobile-nav" class="w-full bg-white rounded-b-[32px] p-2 mt-auto flex-shrink-0 border-t">
+                    <div class="flex justify-around items-center h-16">
+                         <a href="#" class="mobile-nav-link text-center text-gray-500 active" data-target="driverHomeView"><svg class="mobile-nav-icon mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span class="text-xs">Trang chủ</span></a>
+                         <a href="#" class="mobile-nav-link text-center text-gray-500" data-target="driverHistoryView"><svg class="mobile-nav-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="text-xs">Lịch sử</span></a>
+                        <a href="#" class="mobile-nav-link text-center text-gray-500" data-target="driverMapView"><svg class="mobile-nav-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="text-xs">Bản đồ</span></a>
+                        <a href="#" class="mobile-nav-link text-center text-gray-500" data-target="driverAccountView"><svg class="mobile-nav-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="text-xs">Tài khoản</span></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <!-- Gemini AI Modals -->
+    <div id="adminAIModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="p-6 border-b flex justify-between items-center"><h3 class="text-xl font-bold text-gray-800">✨ Phân tích Báo cáo bằng AI</h3><button id="closeAdminAIModal" class="text-gray-500 hover:text-gray-800">&times;</button></div>
+            <div id="adminAIResult" class="p-6 min-h-[200px] flex items-center justify-center">
+                <!-- Loading or result will be injected here -->
+            </div>
+        </div>
+    </div>
+    
+    <div id="driverAIModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-md">
+            <div class="p-6 border-b flex justify-between items-center"><h3 class="text-xl font-bold text-gray-800">✨ Gợi ý Lộ trình Thông minh</h3><button id="closeDriverAIModal" class="text-gray-500 hover:text-gray-800">&times;</button></div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div><label class="font-semibold text-sm">Điểm đi</label><input id="startPoint" type="text" placeholder="VD: Sân bay Tân Sơn Nhất" class="w-full mt-1 p-2 border rounded-lg"></div>
+                    <div><label class="font-semibold text-sm">Điểm đến</label><input id="endPoint" type="text" placeholder="VD: Chợ Bến Thành" class="w-full mt-1 p-2 border rounded-lg"></div>
+                    <button id="getRouteSuggestionBtn" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg shadow hover:bg-indigo-700">Tìm lộ trình</button>
+                </div>
+                <div id="driverAIResult" class="mt-4 min-h-[150px] flex items-center justify-center">
+                    <!-- Loading or result will be injected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
-        // JavaScript để chuyển đổi giữa các giao diện
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- GEMINI API HELPER ---
+        async function callGeminiAPI(prompt) {
+            // This is a mock function. In a real application, you would make a fetch call to the Gemini API.
+            // Replace this with your actual API call.
+            console.log("Calling Gemini API with prompt:", prompt);
+            
+            // Mock API call with a delay to simulate network latency
+            await new Promise(resolve => setTimeout(resolve, 1500));
+
+            // Mock responses based on prompt keywords
+            if (prompt.includes("tóm tắt báo cáo chi tiêu")) {
+                return `
+                    <h4 class="font-bold text-lg mb-2">Tóm tắt Báo cáo Chi tiêu Tháng 6/2025</h4>
+                    <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><b>Xu hướng chính:</b> Tổng chi tiêu tháng 6 là <strong>125,340,000 ₫</strong>, tăng 13% so với tháng 5. Mức tăng chủ yếu đến từ đội Sales do có nhiều chuyến công tác xa.</li>
+                        <li><b>Điểm bất thường:</b> Giao dịch của tài xế <strong>Lê Minh Cường</strong> vào ngày 25/06 có giá trị cao bất thường (2,500,000 ₫), vượt 150% so với mức trung bình. Cần xem xét lại tính hợp lệ.</li>
+                        <li><b>Đề xuất tối ưu:</b> Chi tiêu vào cuối tuần chiếm 20% tổng chi phí. Cân nhắc giới hạn chính sách chi tiêu, không cho phép đổ xăng vào Chủ Nhật để có thể tiết kiệm khoảng <strong>15,000,000 ₫/tháng</strong>.</li>
+                    </ul>
+                `;
+            } else if (prompt.includes("Gợi ý lộ trình")) {
+                 return `
+                    <h4 class="font-bold text-lg mb-2">Lộ trình tối ưu:</h4>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>Đi theo đường Trường Sơn, rẽ trái vào Hoàng Văn Thụ.</li>
+                        <li>Đi thẳng qua ngã tư Phú Nhuận, vào đường Phan Đình Phùng.</li>
+                        <li><strong>Ghé vào trạm xăng Petrolimex số 25 (cách 200m bên phải) để đổ xăng.</strong></li>
+                        <li>Tiếp tục đi thẳng Hai Bà Trưng, rẽ phải vào Lê Thánh Tôn để đến Chợ Bến Thành.</li>
+                    </ol>
+                    <p class="text-sm text-indigo-600 font-semibold mt-4">Chúc bạn có một chuyến đi an toàn!</p>
+                `;
+            }
+            return "Xin lỗi, tôi chưa thể xử lý yêu cầu này.";
+        }
+        
+        // --- ADMIN AI MODAL SCRIPT ---
+        const adminAIModal = document.getElementById('adminAIModal');
+        const analyzeWithAIBtn = document.getElementById('analyzeWithAIBtn');
+        const closeAdminAIModalBtn = document.getElementById('closeAdminAIModal');
+        const adminAIResult = document.getElementById('adminAIResult');
+
+        analyzeWithAIBtn.addEventListener('click', async () => {
+            adminAIModal.classList.remove('hidden');
+            adminAIResult.innerHTML = '<div class="spinner"></div>';
+            const prompt = "Hãy tóm tắt báo cáo chi tiêu này và đưa ra nhận xét, phát hiện bất thường và đề xuất tối ưu: [Dữ liệu báo cáo chi tiêu tháng 6/2025]";
+            const result = await callGeminiAPI(prompt);
+            adminAIResult.innerHTML = result;
+        });
+        closeAdminAIModalBtn.addEventListener('click', () => adminAIModal.classList.add('hidden'));
+
+        // --- DRIVER AI MODAL SCRIPT ---
+        const driverAIModal = document.getElementById('driverAIModal');
+        const suggestRouteBtn = document.getElementById('suggestRouteBtn');
+        const closeDriverAIModalBtn = document.getElementById('closeDriverAIModal');
+        const getRouteSuggestionBtn = document.getElementById('getRouteSuggestionBtn');
+        const driverAIResult = document.getElementById('driverAIResult');
+
+        suggestRouteBtn.addEventListener('click', () => {
+            driverAIModal.classList.remove('hidden');
+            driverAIResult.innerHTML = ''; // Clear previous results
+        });
+        closeDriverAIModalBtn.addEventListener('click', () => driverAIModal.classList.add('hidden'));
+        getRouteSuggestionBtn.addEventListener('click', async () => {
+            const start = document.getElementById('startPoint').value;
+            const end = document.getElementById('endPoint').value;
+            if (!start || !end) {
+                driverAIResult.innerHTML = '<p class="text-red-500">Vui lòng nhập cả điểm đi và điểm đến.</p>';
+                return;
+            }
+            driverAIResult.innerHTML = '<div class="spinner"></div>';
+            const prompt = `Gợi ý lộ trình đi từ '${start}' đến '${end}' và ghé vào một trạm xăng PSI trên đường.`;
+            const result = await callGeminiAPI(prompt);
+            driverAIResult.innerHTML = result;
+        });
+
+
+        // --- ADMIN WEB APP SCRIPT ---
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const mainViews = document.querySelectorAll('.main-view');
+        const mainHeader = document.getElementById('main-header');
+
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                mainViews.forEach(view => view.style.display = 'none');
+                const targetView = document.getElementById(link.getAttribute('data-target'));
+                if (targetView) targetView.style.display = 'block';
+                mainHeader.textContent = link.querySelector('span').textContent;
+            });
+        });
+        
+        // --- MOBILE APP SCRIPT ---
+        const mobileScreens = document.querySelectorAll('.mobile-screen');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        function showMobileScreen(screenId) {
+            mobileScreens.forEach(screen => screen.classList.add('hidden'));
+            const targetScreen = document.getElementById(screenId);
+            if(targetScreen) {
+                 targetScreen.classList.remove('hidden');
+            }
+
+            mobileNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('data-target') === screenId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Hide nav for full-screen views
+            if (['driverScanView', 'driverConfirmView', 'driverSuccessView'].includes(screenId)) {
+                mobileNav.classList.add('hidden');
+            } else {
+                mobileNav.classList.remove('hidden');
+            }
+        }
+
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-target');
+                showMobileScreen(targetId);
+            });
+        });
+
+        // Payment Flow Logic
+        document.getElementById('scanQrBtn').addEventListener('click', () => showMobileScreen('driverScanView'));
+        document.getElementById('cancelScanBtn').addEventListener('click', () => showMobileScreen('driverHomeView'));
+        document.getElementById('simulateScanBtn').addEventListener('click', () => showMobileScreen('driverConfirmView'));
+        document.getElementById('cancelPaymentBtn').addEventListener('click', () => showMobileScreen('driverHomeView'));
+        document.getElementById('confirmPaymentBtn').addEventListener('click', () => showMobileScreen('driverSuccessView'));
+        document.getElementById('doneBtn').addEventListener('click', () => showMobileScreen('driverHomeView'));
+
+        // --- GLOBAL VIEW TOGGLE SCRIPT ---
         const adminView = document.getElementById('adminView');
         const driverView = document.getElementById('driverView');
         const showAdminBtn = document.getElementById('showAdminBtn');
@@ -401,58 +430,42 @@
             showAdminBtn.classList.add('text-gray-600');
         });
 
-        // JavaScript để vẽ biểu đồ
-        const ctx = document.getElementById('spendingChart').getContext('2d');
-        const spendingChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'],
-                datasets: [{
-                    label: 'Chi tiêu (triệu VNĐ)',
-                    data: [12.5, 19.2, 10.3, 15.8, 9.5, 13.7, 8.5],
-                    backgroundColor: 'rgba(79, 70, 229, 0.8)',
-                    borderColor: 'rgba(79, 70, 229, 1)',
-                    borderWidth: 1,
-                    borderRadius: 8,
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } },
-                plugins: { legend: { display: false } }
-            }
-        });
-
-        // JavaScript cho điều hướng sidebar
-        const sidebarLinks = document.querySelectorAll('.sidebar-link');
-        const mainViews = document.querySelectorAll('.main-view');
-        const mainHeader = document.getElementById('main-header');
-
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-
-                // Cập nhật trạng thái active cho link
-                sidebarLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-
-                // Ẩn tất cả các view
-                mainViews.forEach(view => view.style.display = 'none');
-
-                // Hiển thị view tương ứng
-                const targetId = link.getAttribute('data-target');
-                const targetView = document.getElementById(targetId);
-                if (targetView) {
-                    targetView.style.display = 'block';
+        // --- CHART.JS SCRIPT ---
+        const ctxElement = document.getElementById('spendingChart');
+        if (ctxElement) {
+            const ctx = ctxElement.getContext('2d');
+            const spendingChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Đội Sales', 'Đội Giao hàng', 'Hành chính', 'Khác'],
+                    datasets: [{
+                        label: 'Chi tiêu theo bộ phận',
+                        data: [55, 25, 15, 5],
+                        backgroundColor: [
+                            'rgba(79, 70, 229, 0.8)', // indigo
+                            'rgba(5, 150, 105, 0.8)', // emerald
+                            'rgba(245, 158, 11, 0.8)', // amber
+                            'rgba(107, 114, 128, 0.8)' // gray
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        }
+                    }
                 }
-                
-                // Cập nhật tiêu đề
-                mainHeader.textContent = link.querySelector('span').textContent;
             });
-        });
-
+        }
+        
+        // Initial Admin View setup
+        document.getElementById('dashboardView').style.display = 'block';
+    });
     </script>
-
 </body>
 </html>
