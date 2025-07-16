@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giao diện mẫu PSI - Petro Station Intelligent</title>
+    <title>Demo Hệ thống PSI - Petro Station Intelligent</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,11 +27,12 @@
                 transform: scale(0.85);
             }
         }
-        .sidebar-link.active {
+        .sidebar-link.active, .main-toggle-btn.active {
             background-color: #4f46e5; /* indigo-600 */
             color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
-        .sidebar-link, .mobile-nav-link {
+        .sidebar-link, .mobile-nav-link, .main-toggle-btn {
              transition: all 0.2s ease-in-out;
         }
         .mobile-nav-link.active {
@@ -59,6 +60,11 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .fleet-tab.active {
+            border-color: #4f46e5;
+            color: #4f46e5;
+            background-color: #eef2ff;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -67,14 +73,15 @@
         <div class="text-center mb-8">
             <h1 class="text-3xl md:text-4xl font-bold text-gray-800">Demo hệ thống PSI</h1>
             <p class="text-gray-600 mt-2">Mọi hành trình, một chạm là đổ</p>
-            <div class="mt-6 bg-white p-2 rounded-full shadow-md inline-flex space-x-1">
-                <button id="showAdminBtn" class="px-6 py-2 rounded-full bg-indigo-600 text-white font-semibold shadow">Admin Web App</button>
-                <button id="showDriverBtn" class="px-6 py-2 rounded-full text-gray-600 font-semibold">Driver Mobile App</button>
+            <div class="mt-6 bg-white p-2 rounded-full shadow-md inline-flex flex-wrap justify-center space-x-1">
+                <button id="showAdminBtn" class="main-toggle-btn px-4 md:px-6 py-2 rounded-full text-gray-600 font-semibold active">Admin Web App</button>
+                <button id="showDriverBtn" class="main-toggle-btn px-4 md:px-6 py-2 rounded-full text-gray-600 font-semibold">Driver Mobile App</button>
+                <button id="showMerchantBtn" class="main-toggle-btn px-4 md:px-6 py-2 rounded-full text-gray-600 font-semibold">Merchant App</button>
             </div>
         </div>
 
         <!-- Giao diện Admin Web App -->
-        <div id="adminView" class="w-full max-w-screen-2xl mx-auto">
+        <div id="adminView" class="main-app-view w-full max-w-screen-2xl mx-auto">
              <div class="flex h-screen bg-gray-50 overflow-hidden rounded-xl shadow-2xl">
                 <!-- Sidebar -->
                 <div class="hidden md:flex flex-col w-64 bg-white">
@@ -82,30 +89,12 @@
                         <h1 class="text-2xl font-bold text-indigo-600">PSI</h1>
                     </div>
                     <nav id="sidebar-nav" class="flex-1 px-4 py-6 space-y-2">
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg active" data-target="dashboardView">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                            <span class="ml-4 font-semibold">Tổng quan</span>
-                        </a>
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="transactionsView">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            <span class="ml-4 font-semibold">Giao dịch</span>
-                        </a>
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="fleetView">
-                           <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                            <span class="ml-4 font-semibold">Quản lý Đội xe</span>
-                        </a>
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="policyView">
-                           <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-                            <span class="ml-4 font-semibold">Chính sách Chi tiêu</span>
-                        </a>
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="invoiceView">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                            <span class="ml-4 font-semibold">Hóa đơn VAT</span>
-                        </a>
-                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="reportView">
-                            <svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-                            <span class="ml-4 font-semibold">Báo cáo</span>
-                        </a>
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg active" data-target="dashboardView"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span class="ml-4 font-semibold">Tổng quan</span></a>
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="transactionsView"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><span class="ml-4 font-semibold">Giao dịch</span></a>
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="fleetView"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg><span class="ml-4 font-semibold">Quản lý Đội xe</span></a>
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="policyView"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg><span class="ml-4 font-semibold">Chính sách Chi tiêu</span></a>
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="invoiceView"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="ml-4 font-semibold">Hóa đơn VAT</span></a>
+                        <a href="#" class="sidebar-link flex items-center px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-lg" data-target="reportView"><svg class="sidebar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg><span class="ml-4 font-semibold">Báo cáo</span></a>
                     </nav>
                 </div>
 
@@ -114,7 +103,7 @@
                     <header class="flex justify-between items-center p-6 bg-white border-b">
                         <h2 id="main-header" class="text-2xl font-bold text-gray-800">Bảng điều khiển</h2>
                         <div class="flex items-center space-x-4">
-                            <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Nạp tiền</button>
+                            <button id="topUpBtn" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Nạp tiền</button>
                             <div class="flex items-center"><span class="font-semibold mr-2">Công ty ABC</span><img class="h-10 w-10 rounded-full object-cover" src="https://placehold.co/100x100/E2E8F0/4A5568?text=A" alt="Avatar"></div>
                         </div>
                     </header>
@@ -128,34 +117,40 @@
                                 <div class="bg-white p-6 rounded-lg shadow"><h3 class="text-sm font-medium text-gray-500">Tổng số giao dịch</h3><p class="mt-2 text-3xl font-bold text-gray-900">152</p></div>
                             </div>
                             <div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
-                                <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow">
-                                    <h3 class="font-semibold text-gray-800">Cơ cấu chi tiêu theo bộ phận</h3>
-                                    <div class="h-80"><canvas id="spendingChart"></canvas></div>
-                                </div>
-                                <div class="bg-white p-6 rounded-lg shadow">
-                                    <h3 class="font-semibold text-gray-800">Giao dịch gần đây</h3>
-                                    <ul class="mt-4 space-y-4">
-                                        <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Nguyễn Văn An</p><p class="text-sm text-gray-500">Xe 51F-123.45</p></div><div class="text-right"><p class="font-bold text-gray-900">500,000 ₫</p><p class="text-sm text-gray-500">15 phút trước</p></div></li>
-                                        <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Trần Thị Bích</p><p class="text-sm text-gray-500">Xe 29A-987.65</p></div><div class="text-right"><p class="font-bold text-gray-900">750,000 ₫</p><p class="text-sm text-gray-500">1 giờ trước</p></div></li>
-                                        <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Lê Minh Cường</p><p class="text-sm text-gray-500">Xe 72C-456.78</p></div><div class="text-right"><p class="font-bold text-gray-900">1,200,000 ₫</p><p class="text-sm text-gray-500">3 giờ trước</p></div></li>
-                                    </ul>
-                                </div>
+                                <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-gray-800">Cơ cấu chi tiêu theo bộ phận</h3><div class="h-80"><canvas id="spendingChart"></canvas></div></div>
+                                <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-gray-800">Giao dịch gần đây</h3><ul class="mt-4 space-y-4">
+                                    <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Nguyễn Văn An</p><p class="text-sm text-gray-500">Xe 51F-123.45</p></div><div class="text-right"><p class="font-bold text-gray-900">500,000 ₫</p><p class="text-sm text-gray-500">15 phút trước</p></div></li>
+                                    <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Trần Thị Bích</p><p class="text-sm text-gray-500">Xe 29A-987.65</p></div><div class="text-right"><p class="font-bold text-gray-900">750,000 ₫</p><p class="text-sm text-gray-500">1 giờ trước</p></div></li>
+                                    <li class="flex items-center"><div class="p-3 rounded-full bg-green-100"><svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-4 flex-1"><p class="font-semibold text-gray-800">Lê Minh Cường</p><p class="text-sm text-gray-500">Xe 72C-456.78</p></div><div class="text-right"><p class="font-bold text-gray-900">1,200,000 ₫</p><p class="text-sm text-gray-500">3 giờ trước</p></div></li>
+                                </ul></div>
                             </div>
                         </div>
                         <!-- View: Transactions -->
                         <div id="transactionsView" class="main-view hidden"><div class="bg-white p-6 rounded-lg shadow"><div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4"><div class="relative w-full md:w-1/3"><input type="text" placeholder="Tìm kiếm giao dịch..." class="w-full pl-10 pr-4 py-2 border rounded-lg"><svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg></div><div class="flex items-center gap-4"><input type="date" class="border rounded-lg px-4 py-2"><button class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-300">Bộ lọc</button></div></div><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">ID Giao dịch</th><th scope="col" class="px-6 py-3">Thời gian</th><th scope="col" class="px-6 py-3">Tài xế & Xe</th><th scope="col" class="px-6 py-3">Trạm xăng</th><th scope="col" class="px-6 py-3">Số tiền</th><th scope="col" class="px-6 py-3">Trạng thái</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">PSI-12345</td><td class="px-6 py-4">03/07/2025 20:15</td><td class="px-6 py-4">Nguyễn Văn An<br><span class="text-gray-400">51F-123.45</span></td><td class="px-6 py-4">Petrolimex số 10</td><td class="px-6 py-4 font-bold">500,000 ₫</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Thành công</span></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">PSI-12344</td><td class="px-6 py-4">03/07/2025 19:30</td><td class="px-6 py-4">Trần Thị Bích<br><span class="text-gray-400">29A-987.65</span></td><td class="px-6 py-4">PVOIL Cống Quỳnh</td><td class="px-6 py-4 font-bold">750,000 ₫</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Thành công</span></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">PSI-12343</td><td class="px-6 py-4">03/07/2025 17:05</td><td class="px-6 py-4">Lê Minh Cường<br><span class="text-gray-400">72C-456.78</span></td><td class="px-6 py-4">Comeco Hàng Xanh</td><td class="px-6 py-4 font-bold">1,200,000 ₫</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Thất bại</span></td></tr></tbody></table></div></div></div>
                         <!-- View: Fleet Management -->
-                        <div id="fleetView" class="main-view hidden"><div class="flex justify-end mb-4"><button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Thêm mới</button></div><div class="bg-white p-6 rounded-lg shadow"><h3 class="text-xl font-bold mb-4">Quản lý Tài xế</h3><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">Tên tài xế</th><th scope="col" class="px-6 py-3">Thông tin liên hệ</th><th scope="col" class="px-6 py-3">Phương tiện phụ trách</th><th scope="col" class="px-6 py-3">Trạng thái</th><th scope="col" class="px-6 py-3">Hành động</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">Nguyễn Văn An</td><td class="px-6 py-4">0901234567<br><span class="text-gray-400">an.nguyen@email.com</span></td><td class="px-6 py-4">51F-123.45</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Hoạt động</span></td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">Trần Thị Bích</td><td class="px-6 py-4">0987654321<br><span class="text-gray-400">bich.tran@email.com</span></td><td class="px-6 py-4">29A-987.65</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Tạm khóa</span></td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr></tbody></table></div></div></div>
+                        <div id="fleetView" class="main-view hidden">
+                            <div class="mb-4 border-b border-gray-200">
+                                <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                                    <button class="fleet-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 active" data-target="driversTab">Tài xế</button>
+                                    <button class="fleet-tab whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" data-target="vehiclesTab">Phương tiện</button>
+                                </nav>
+                            </div>
+                            <div id="driversTab" class="fleet-tab-content">
+                                <div class="flex justify-end mb-4"><button id="openAddDriverModal" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Thêm tài xế</button></div>
+                                <div class="bg-white p-6 rounded-lg shadow"><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">Tên tài xế</th><th scope="col" class="px-6 py-3">Thông tin liên hệ</th><th scope="col" class="px-6 py-3">Phương tiện phụ trách</th><th scope="col" class="px-6 py-3">Trạng thái</th><th scope="col" class="px-6 py-3">Hành động</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">Nguyễn Văn An</td><td class="px-6 py-4">0901234567<br><span class="text-gray-400">an.nguyen@email.com</span></td><td class="px-6 py-4">51F-123.45</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-green-800 bg-green-100 rounded-full">Hoạt động</span></td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">Trần Thị Bích</td><td class="px-6 py-4">0987654321<br><span class="text-gray-400">bich.tran@email.com</span></td><td class="px-6 py-4">29A-987.65</td><td class="px-6 py-4"><span class="px-2 py-1 text-xs font-medium text-red-800 bg-red-100 rounded-full">Tạm khóa</span></td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr></tbody></table></div></div>
+                            </div>
+                            <div id="vehiclesTab" class="fleet-tab-content hidden">
+                                <div class="flex justify-end mb-4"><button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Thêm phương tiện</button></div>
+                                <div class="bg-white p-6 rounded-lg shadow"><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">Biển số xe</th><th scope="col" class="px-6 py-3">Loại xe</th><th scope="col" class="px-6 py-3">Dung tích bình xăng</th><th scope="col" class="px-6 py-3">Tài xế phụ trách</th><th scope="col" class="px-6 py-3">Hành động</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">51F-123.45</td><td class="px-6 py-4">Xe tải 5 tấn</td><td class="px-6 py-4">70 lít</td><td class="px-6 py-4">Nguyễn Văn An</td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">29A-987.65</td><td class="px-6 py-4">Xe đầu kéo</td><td class="px-6 py-4">100 lít</td><td class="px-6 py-4">Trần Thị Bích</td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a></td></tr></tbody></table></div></div>
+                            </div>
+                        </div>
                         <!-- View: Policy -->
-                        <div id="policyView" class="main-view hidden"><div class="flex justify-end mb-4"><button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Tạo chính sách mới</button></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="bg-white p-6 rounded-lg shadow border-l-4 border-indigo-500"><h4 class="font-bold text-lg">Chính sách đội Sales</h4><p class="text-sm text-gray-500 mt-2">Áp dụng cho 5 tài xế</p><div class="mt-4 space-y-2"><p class="text-sm"><span class="font-semibold">Hạn mức:</span> 5,000,000 ₫ / tuần</p><p class="text-sm"><span class="font-semibold">Thời gian:</span> T2 - T6, 8h - 18h</p><p class="text-sm"><span class="font-semibold">Loại xăng:</span> Ron 95</p></div><div class="mt-4 pt-4 border-t flex justify-end gap-2"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a><a href="#" class="font-medium text-red-600 hover:underline">Xóa</a></div></div><div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500"><h4 class="font-bold text-lg">Chính sách Giao hàng</h4><p class="text-sm text-gray-500 mt-2">Áp dụng cho 12 tài xế</p><div class="mt-4 space-y-2"><p class="text-sm"><span class="font-semibold">Hạn mức:</span> 150 lít dầu / tháng</p><p class="text-sm"><span class="font-semibold">Thời gian:</span> Tất cả các ngày</p><p class="text-sm"><span class="font-semibold">Trạm xăng:</span> Petrolimex, PVOIL</p></div><div class="mt-4 pt-4 border-t flex justify-end gap-2"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a><a href="#" class="font-medium text-red-600 hover:underline">Xóa</a></div></div></div></div>
+                        <div id="policyView" class="main-view hidden"><div class="flex justify-end mb-4"><button id="openAddPolicyModal" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-indigo-700 transition duration-300">+ Tạo chính sách mới</button></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="bg-white p-6 rounded-lg shadow border-l-4 border-indigo-500"><h4 class="font-bold text-lg">Chính sách đội Sales</h4><p class="text-sm text-gray-500 mt-2">Áp dụng cho 5 tài xế</p><div class="mt-4 space-y-2"><p class="text-sm"><span class="font-semibold">Hạn mức:</span> 5,000,000 ₫ / tuần</p><p class="text-sm"><span class="font-semibold">Thời gian:</span> T2 - T6, 8h - 18h</p><p class="text-sm"><span class="font-semibold">Loại xăng:</span> Ron 95</p></div><div class="mt-4 pt-4 border-t flex justify-end gap-2"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a><a href="#" class="font-medium text-red-600 hover:underline">Xóa</a></div></div><div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500"><h4 class="font-bold text-lg">Chính sách Giao hàng</h4><p class="text-sm text-gray-500 mt-2">Áp dụng cho 12 tài xế</p><div class="mt-4 space-y-2"><p class="text-sm"><span class="font-semibold">Hạn mức:</span> 150 lít dầu / tháng</p><p class="text-sm"><span class="font-semibold">Thời gian:</span> Tất cả các ngày</p><p class="text-sm"><span class="font-semibold">Trạm xăng:</span> Petrolimex, PVOIL</p></div><div class="mt-4 pt-4 border-t flex justify-end gap-2"><a href="#" class="font-medium text-indigo-600 hover:underline">Sửa</a><a href="#" class="font-medium text-red-600 hover:underline">Xóa</a></div></div></div></div>
                         <!-- View: Invoices -->
                         <div id="invoiceView" class="main-view hidden"><div class="bg-white p-6 rounded-lg shadow"><h3 class="text-xl font-bold mb-4">Hóa đơn điện tử</h3><div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-500"><thead class="text-xs text-gray-700 uppercase bg-gray-50"><tr><th scope="col" class="px-6 py-3">Mã hóa đơn</th><th scope="col" class="px-6 py-3">Kỳ hóa đơn</th><th scope="col" class="px-6 py-3">Ngày phát hành</th><th scope="col" class="px-6 py-3">Tổng tiền</th><th scope="col" class="px-6 py-3">Hành động</th></tr></thead><tbody><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">HD-202506-001</td><td class="px-6 py-4">Tháng 06/2025</td><td class="px-6 py-4">01/07/2025</td><td class="px-6 py-4 font-bold">125,340,000 ₫</td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Tải về (PDF)</a></td></tr><tr class="bg-white border-b"><td class="px-6 py-4 font-medium text-gray-900">HD-202505-001</td><td class="px-6 py-4">Tháng 05/2025</td><td class="px-6 py-4">01/06/2025</td><td class="px-6 py-4 font-bold">110,800,000 ₫</td><td class="px-6 py-4"><a href="#" class="font-medium text-indigo-600 hover:underline">Tải về (PDF)</a></td></tr></tbody></table></div></div></div>
                         <!-- View: Reports -->
                         <div id="reportView" class="main-view hidden">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-xl font-bold">Tạo báo cáo</h3>
-                                <button id="analyzeWithAIBtn" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:from-purple-600 hover:to-indigo-700 transition duration-300">✨ Phân tích với AI</button>
-                            </div>
+                            <div class="flex justify-between items-center mb-4"><h3 class="text-xl font-bold">Tạo báo cáo</h3><button id="analyzeWithAIBtn" class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow hover:from-purple-600 hover:to-indigo-700 transition duration-300">✨ Phân tích với AI</button></div>
                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                 <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"><h4 class="font-bold text-lg">Báo cáo tổng hợp chi tiêu</h4><p class="text-sm text-gray-500 mt-2">Xem tổng quan chi tiêu theo phòng ban, theo thời gian.</p><button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button></div>
                                 <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow"><h4 class="font-bold text-lg">Báo cáo theo tài xế</h4><p class="text-sm text-gray-500 mt-2">Phân tích chi tiết chi tiêu của từng tài xế hoặc một nhóm tài xế.</p><button class="mt-4 w-full bg-indigo-100 text-indigo-700 font-bold py-2 px-4 rounded-lg hover:bg-indigo-200">Tạo báo cáo</button></div>
@@ -168,28 +163,16 @@
         </div>
 
         <!-- Giao diện Driver Mobile App -->
-        <div id="driverView" class="hidden flex justify-center items-start pt-10 mobile-app-container">
+        <div id="driverView" class="main-app-view hidden flex justify-center items-start pt-10 mobile-app-container">
             <div class="w-full max-w-sm h-[800px] bg-gray-50 rounded-[40px] shadow-2xl p-1 flex flex-col border-8 border-black overflow-hidden">
                 <div class="w-32 h-6 bg-black rounded-b-xl mx-auto mt-2 flex-shrink-0"></div>
-                
                 <div class="flex-1 flex flex-col relative">
                     <!-- Screen: Home -->
                     <div id="driverHomeView" class="mobile-screen absolute inset-0 flex flex-col p-4">
                         <div class="flex-shrink-0"><p class="text-gray-500">Xin chào,</p><h2 class="text-2xl font-bold text-gray-900">Nguyễn Văn An</h2></div>
-                        <div class="p-6 my-6 bg-indigo-600 text-white rounded-2xl shadow-lg flex flex-col items-center flex-shrink-0">
-                            <p class="text-sm font-medium text-indigo-200">Hạn mức tuần này còn lại</p>
-                            <p class="text-4xl font-extrabold my-3">850,000 <span class="text-2xl font-semibold">₫</span></p>
-                            <div class="w-full bg-indigo-500 rounded-full h-2.5 mt-2"><div class="bg-white rounded-full h-2.5" style="width: 42.5%"></div></div>
-                            <p class="text-xs text-indigo-200 mt-2">trên tổng 2,000,000 ₫</p>
-                        </div>
-                        <div class="flex-grow flex items-center justify-center">
-                            <button id="scanQrBtn" class="w-48 h-48 bg-indigo-600 rounded-full flex flex-col items-center justify-center text-white shadow-2xl hover:bg-indigo-700 transition duration-300">
-                                <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                                <span class="text-2xl font-bold mt-2">QUÉT MÃ</span>
-                            </button>
-                        </div>
+                        <div class="p-6 my-6 bg-indigo-600 text-white rounded-2xl shadow-lg flex flex-col items-center flex-shrink-0"><p class="text-sm font-medium text-indigo-200">Hạn mức tuần này còn lại</p><p class="text-4xl font-extrabold my-3">850,000 <span class="text-2xl font-semibold">₫</span></p><div class="w-full bg-indigo-500 rounded-full h-2.5 mt-2"><div class="bg-white rounded-full h-2.5" style="width: 42.5%"></div></div><p class="text-xs text-indigo-200 mt-2">trên tổng 2,000,000 ₫</p></div>
+                        <div class="flex-grow flex items-center justify-center"><button id="scanQrBtn" class="w-48 h-48 bg-indigo-600 rounded-full flex flex-col items-center justify-center text-white shadow-2xl hover:bg-indigo-700 transition duration-300"><svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg><span class="text-2xl font-bold mt-2">QUÉT MÃ</span></button></div>
                     </div>
-
                     <!-- Screen: History -->
                     <div id="driverHistoryView" class="mobile-screen absolute inset-0 flex flex-col p-4 hidden">
                         <h2 class="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Lịch sử giao dịch</h2>
@@ -198,18 +181,12 @@
                             <div class="bg-white p-4 rounded-xl shadow-sm"><p class="text-sm font-semibold text-gray-500 mb-2">Hôm qua, 03/07/2025</p><div class="flex items-center mb-3"><div class="p-2 rounded-full bg-green-100"><svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div><div class="ml-3 flex-1"><p class="font-semibold">PVOIL Cống Quỳnh</p><p class="text-xs text-gray-400">19:30</p></div><p class="font-bold text-green-600">-750,000 ₫</p></div><div class="flex items-center"><div class="p-2 rounded-full bg-red-100"><svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div><div class="ml-3 flex-1"><p class="font-semibold">Comeco Hàng Xanh</p><p class="text-xs text-gray-400">17:05</p></div><p class="font-bold text-red-600">Thất bại</p></div></div>
                         </div>
                     </div>
-
                     <!-- Screen: Map -->
                     <div id="driverMapView" class="mobile-screen absolute inset-0 flex flex-col hidden">
                          <h2 class="text-2xl font-bold text-gray-900 p-4 pb-0 flex-shrink-0">Trạm xăng gần bạn</h2>
                          <button id="suggestRouteBtn" class="m-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-bold py-3 px-4 rounded-lg shadow flex items-center justify-center gap-2">✨ Gợi ý Lộ trình Thông minh</button>
-                         <div class="flex-1 bg-gray-300 rounded-lg relative mx-4 mb-4">
-                            <img src="https://placehold.co/400x700/e2e8f0/4a5568?text=Bản đồ" class="w-full h-full object-cover rounded-lg" alt="Bản đồ các trạm xăng">
-                            <div class="absolute top-1/4 left-1/4"><div class="w-8 h-8 bg-indigo-600 rounded-full border-2 border-white flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div></div>
-                            <div class="absolute top-1/2 right-1/3"><div class="w-8 h-8 bg-indigo-600 rounded-full border-2 border-white flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div></div>
-                         </div>
+                         <div class="flex-1 bg-gray-300 rounded-lg relative mx-4 mb-4"><img src="https://placehold.co/400x700/e2e8f0/4a5568?text=Bản đồ" class="w-full h-full object-cover rounded-lg" alt="Bản đồ các trạm xăng"><div class="absolute top-1/4 left-1/4"><div class="w-8 h-8 bg-indigo-600 rounded-full border-2 border-white flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div></div><div class="absolute top-1/2 right-1/3"><div class="w-8 h-8 bg-indigo-600 rounded-full border-2 border-white flex items-center justify-center"><svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div></div></div>
                     </div>
-
                     <!-- Screen: Account -->
                     <div id="driverAccountView" class="mobile-screen absolute inset-0 flex flex-col p-4 hidden">
                         <div class="flex items-center gap-4 mb-8 flex-shrink-0"><img class="h-16 w-16 rounded-full object-cover" src="https://placehold.co/100x100/E2E8F0/4A5568?text=A" alt="Avatar"><div><h2 class="text-2xl font-bold text-gray-900">Nguyễn Văn An</h2><p class="text-gray-500">0901234567</p></div></div>
@@ -220,7 +197,6 @@
                              <a href="#" class="flex items-center bg-white p-4 rounded-lg shadow-sm text-red-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg><span class="ml-4 font-semibold">Đăng xuất</span></a>
                         </div>
                     </div>
-
                     <!-- Screen: Scan QR -->
                     <div id="driverScanView" class="mobile-screen absolute inset-0 bg-black bg-opacity-80 flex flex-col items-center justify-center hidden"><div class="w-64 h-64 border-4 border-dashed border-white rounded-lg"></div><p class="text-white text-lg mt-4">Di chuyển camera đến mã QR</p><button id="simulateScanBtn" class="mt-8 bg-white text-black font-bold py-2 px-6 rounded-lg">Simulate Scan</button><button id="cancelScanBtn" class="absolute top-8 right-8 text-white"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div>
                     <!-- Screen: Confirm Payment -->
@@ -228,30 +204,77 @@
                     <!-- Screen: Success -->
                     <div id="driverSuccessView" class="mobile-screen absolute inset-0 flex flex-col p-6 bg-green-500 text-white hidden"><div class="my-auto text-center"><div class="w-24 h-24 bg-white bg-opacity-20 rounded-full mx-auto flex items-center justify-center"><svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg></div><h2 class="text-3xl font-bold mt-6">Thanh toán thành công!</h2><p class="text-5xl font-bold my-4">500,000<span class="text-2xl">₫</span></p><p class="bg-white bg-opacity-20 px-4 py-2 rounded-lg inline-block">Tại: Petrolimex số 10</p></div><button id="doneBtn" class="w-full bg-white text-green-600 font-bold py-4 rounded-xl mt-auto">Hoàn tất</button></div>
                 </div>
-
-                <!-- Bottom Nav -->
-                <div id="mobile-nav" class="w-full bg-white rounded-b-[32px] p-2 mt-auto flex-shrink-0 border-t">
-                    <div class="flex justify-around items-center h-16">
-                         <a href="#" class="mobile-nav-link text-center text-gray-500 active" data-target="driverHomeView"><svg class="mobile-nav-icon mx-auto" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span class="text-xs">Trang chủ</span></a>
-                         <a href="#" class="mobile-nav-link text-center text-gray-500" data-target="driverHistoryView"><svg class="mobile-nav-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="text-xs">Lịch sử</span></a>
-                        <a href="#" class="mobile-nav-link text-center text-gray-500" data-target="driverMapView"><svg class="mobile-nav-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="text-xs">Bản đồ</span></a>
-                        <a href="#" class="mobile-nav-link text-center text-gray-500" data-target="driverAccountView"><svg class="mobile-nav-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="text-xs">Tài khoản</span></a>
+                <div id="mobile-nav" class="w-full bg-white rounded-b-[32px] p-2 mt-auto flex-shrink-0 border-t"><div class="flex justify-around items-center h-16"><a href="#" class="mobile-nav-link flex flex-col items-center text-center text-gray-500 w-1/4 active" data-target="driverHomeView"><svg class="mobile-nav-icon" fill="currentColor" viewBox="0 0 20 20"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path></svg><span class="text-xs mt-1">Trang chủ</span></a><a href="#" class="mobile-nav-link flex flex-col items-center text-center text-gray-500 w-1/4" data-target="driverHistoryView"><svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg><span class="text-xs mt-1">Lịch sử</span></a><a href="#" class="mobile-nav-link flex flex-col items-center text-center text-gray-500 w-1/4" data-target="driverMapView"><svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span class="text-xs mt-1">Bản đồ</span></a><a href="#" class="mobile-nav-link flex flex-col items-center text-center text-gray-500 w-1/4" data-target="driverAccountView"><svg class="mobile-nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg><span class="text-xs mt-1">Tài khoản</span></a></div></div>
+            </div>
+        </div>
+        
+        <!-- Giao diện Merchant App -->
+        <div id="merchantView" class="main-app-view hidden flex justify-center items-start pt-10 mobile-app-container">
+            <div class="w-full max-w-sm h-[800px] bg-white rounded-[40px] shadow-2xl p-1 flex flex-col border-8 border-black overflow-hidden">
+                <div class="w-32 h-6 bg-black rounded-b-xl mx-auto mt-2 flex-shrink-0"></div>
+                <div class="flex-1 flex flex-col relative">
+                    <!-- Merchant screens... -->
+                    <div id="merchantNumpadView" class="mobile-screen absolute inset-0 flex flex-col p-4">
+                        <div class="flex-shrink-0 text-center"><p class="text-gray-500">Trạm xăng Petrolimex số 10</p><h2 class="text-xl font-bold text-gray-900">Nhân viên: Nguyễn Thị Lan</h2></div>
+                        <div class="flex-grow flex flex-col justify-center items-center">
+                            <p class="text-gray-500">Nhập số tiền cần thanh toán</p>
+                            <p id="merchantAmountDisplay" class="text-6xl font-bold text-indigo-600 my-4">0<span class="text-3xl">₫</span></p>
+                        </div>
+                        <div class="grid grid-cols-3 gap-2 p-4">
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">1</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">2</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">3</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">4</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">5</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">6</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">7</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">8</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">9</button>
+                            <button id="merchantClearBtn" class="text-xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200 text-red-500">Xóa</button>
+                            <button class="numpad-btn text-3xl font-bold p-4 rounded-lg bg-gray-100 hover:bg-gray-200">0</button>
+                            <button id="merchantBackspaceBtn" class="p-4 rounded-lg bg-gray-100 hover:bg-gray-200 flex justify-center items-center"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 002.828 0L21 12M3 12l6.414-6.414a2 2 0 012.828 0L21 12"></path></svg></button>
+                        </div>
+                        <button id="generateQRBtn" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl shadow-lg">Tạo mã QR</button>
+                    </div>
+                    <div id="merchantQRView" class="mobile-screen absolute inset-0 flex flex-col items-center justify-center p-6 bg-gray-50 hidden">
+                        <h2 class="text-2xl font-bold text-center text-gray-900">Đưa mã này cho tài xế</h2>
+                        <div class="my-6"><img src="https://placehold.co/300x300/e2e8f0/4a5568?text=QR+Code" alt="QR Code"></div>
+                        <p class="text-4xl font-bold text-indigo-600" id="qrAmountDisplay">500,000 ₫</p>
+                        <p class="text-gray-500 mt-2">Mã sẽ hết hạn trong <span id="qrTimer">60</span> giây</p>
+                        <button id="closeQRBtn" class="w-full text-gray-500 font-bold py-4 mt-auto">Hủy</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Gemini AI Modals -->
-    <div id="adminAIModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+    <!-- Modals -->
+    <div id="topUpModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
         <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-2xl">
-            <div class="p-6 border-b flex justify-between items-center"><h3 class="text-xl font-bold text-gray-800">✨ Phân tích Báo cáo bằng AI</h3><button id="closeAdminAIModal" class="text-gray-500 hover:text-gray-800">&times;</button></div>
-            <div id="adminAIResult" class="p-6 min-h-[200px] flex items-center justify-center">
-                <!-- Loading or result will be injected here -->
+            <div class="p-6 border-b flex justify-between items-center"><h3 class="text-xl font-bold text-gray-800">Nạp tiền vào tài khoản</h3><button id="closeTopUpModal" class="text-gray-500 hover:text-gray-800">&times;</button></div>
+            <div class="p-6">
+                <p class="text-sm text-gray-600">Số dư hiện tại: <span class="font-bold text-lg text-indigo-600">1,250,000,000 ₫</span></p>
+                <div class="mt-4 p-4 bg-indigo-50 rounded-lg">
+                    <h4 class="font-bold text-indigo-800">💡 Gợi ý nạp tiền thông minh cho hôm nay</h4>
+                    <div class="mt-2 space-y-2">
+                        <button class="w-full text-left p-3 bg-white rounded-lg border hover:border-indigo-500"><strong>15,000,000 ₫</strong><span class="text-sm text-gray-500"> - Dựa trên tổng dung tích đội xe</span></button>
+                        <button class="w-full text-left p-3 bg-white rounded-lg border hover:border-indigo-500"><strong>10,000,000 ₫</strong><span class="text-sm text-gray-500"> - Đủ cho 5 xe đầu kéo</span></button>
+                    </div>
+                </div>
+                <div class="mt-6">
+                    <label class="font-semibold text-sm">Hoặc nhập số tiền khác</label>
+                    <input type="text" placeholder="Nhập số tiền" class="w-full mt-1 p-3 border rounded-lg text-xl font-bold">
+                </div>
+                <button class="mt-6 w-full bg-indigo-600 text-white font-bold py-3 rounded-lg shadow hover:bg-indigo-700">Tiếp tục</button>
             </div>
         </div>
     </div>
-    
+    <div id="adminAIModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="p-6 border-b flex justify-between items-center"><h3 class="text-xl font-bold text-gray-800">✨ Phân tích Báo cáo bằng AI</h3><button id="closeAdminAIModal" class="text-gray-500 hover:text-gray-800">&times;</button></div>
+            <div id="adminAIResult" class="p-6 min-h-[200px] flex items-center justify-center"></div>
+        </div>
+    </div>
     <div id="driverAIModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
         <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-md">
             <div class="p-6 border-b flex justify-between items-center"><h3 class="text-xl font-bold text-gray-800">✨ Gợi ý Lộ trình Thông minh</h3><button id="closeDriverAIModal" class="text-gray-500 hover:text-gray-800">&times;</button></div>
@@ -261,9 +284,114 @@
                     <div><label class="font-semibold text-sm">Điểm đến</label><input id="endPoint" type="text" placeholder="VD: Chợ Bến Thành" class="w-full mt-1 p-2 border rounded-lg"></div>
                     <button id="getRouteSuggestionBtn" class="w-full bg-indigo-600 text-white font-bold py-3 rounded-lg shadow hover:bg-indigo-700">Tìm lộ trình</button>
                 </div>
-                <div id="driverAIResult" class="mt-4 min-h-[150px] flex items-center justify-center">
-                    <!-- Loading or result will be injected here -->
-                </div>
+                <div id="driverAIResult" class="mt-4 min-h-[150px] flex items-center justify-center"></div>
+            </div>
+        </div>
+    </div>
+    <div id="addDriverModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-lg">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-xl font-bold text-gray-800">Thêm tài xế mới</h3>
+                <button id="closeAddDriverModal" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div class="p-6">
+                <form id="addDriverForm" class="space-y-4">
+                    <div>
+                        <label for="driverName" class="font-semibold text-sm">Họ và tên</label>
+                        <input id="driverName" type="text" placeholder="Nguyễn Văn A" class="w-full mt-1 p-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label for="driverPhone" class="font-semibold text-sm">Số điện thoại</label>
+                        <input id="driverPhone" type="tel" placeholder="0901234567" class="w-full mt-1 p-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label for="driverEmail" class="font-semibold text-sm">Email</label>
+                        <input id="driverEmail" type="email" placeholder="nguyenvana@email.com" class="w-full mt-1 p-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label for="driverVehicle" class="font-semibold text-sm">Biển số xe phụ trách</label>
+                        <select id="driverVehicle" class="w-full mt-1 p-2 border rounded-lg bg-white">
+                            <option>Chọn phương tiện</option>
+                            <option>51F-123.45</option>
+                            <option>29A-987.65</option>
+                            <option>72C-456.78</option>
+                        </select>
+                    </div>
+                    <div>
+                         <label class="font-semibold text-sm">Ảnh đại diện</label>
+                         <div class="mt-1 flex items-center gap-4">
+                            <span class="inline-block h-12 w-12 rounded-full overflow-hidden bg-gray-100">
+                               <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                  <path d="M24 20.993V24H0v-2.997A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                               </svg>
+                            </span>
+                            <input type="file" class="text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"/>
+                         </div>
+                    </div>
+                    <div class="pt-4 flex justify-end gap-3">
+                        <button type="button" id="cancelAddDriverBtn" class="px-6 py-2 rounded-lg bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200">Hủy</button>
+                        <button type="submit" class="px-6 py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700">Thêm tài xế</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="addPolicyModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div class="gemini-modal bg-white rounded-lg shadow-xl w-full max-w-2xl">
+            <div class="p-6 border-b flex justify-between items-center">
+                <h3 class="text-xl font-bold text-gray-800">Tạo chính sách chi tiêu mới</h3>
+                <button id="closeAddPolicyModal" class="text-gray-500 hover:text-gray-800">&times;</button>
+            </div>
+            <div class="p-6 max-h-[80vh] overflow-y-auto">
+                <form id="addPolicyForm" class="space-y-6">
+                    <div>
+                        <label for="policyName" class="font-semibold text-sm">Tên chính sách</label>
+                        <input id="policyName" type="text" placeholder="VD: Chính sách cho đội giao hàng nội thành" class="w-full mt-1 p-2 border rounded-lg">
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="font-semibold text-sm mb-2">Hạn mức chi tiêu</p>
+                        <div class="flex items-center gap-4">
+                            <input type="text" placeholder="5,000,000" class="w-full p-2 border rounded-lg">
+                            <select class="p-2 border rounded-lg bg-white"><option>VNĐ</option><option>Lít</option></select>
+                            <span class="text-gray-500">/</span>
+                            <select class="p-2 border rounded-lg bg-white"><option>Ngày</option><option>Tuần</option><option>Tháng</option></select>
+                        </div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="font-semibold text-sm mb-2">Giới hạn theo thời gian</p>
+                        <div class="flex flex-wrap gap-3 mb-2">
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> T2</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> T3</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> T4</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> T5</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> T6</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> T7</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> CN</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="time" value="08:00" class="p-2 border rounded-lg">
+                            <span>-</span>
+                            <input type="time" value="18:00" class="p-2 border rounded-lg">
+                        </div>
+                    </div>
+                     <div class="border-t pt-4">
+                        <p class="font-semibold text-sm mb-2">Giới hạn theo địa điểm (Trạm xăng)</p>
+                        <div class="flex flex-wrap gap-3">
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> Petrolimex</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> PVOIL</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> Comeco</label>
+                            <label class="flex items-center gap-2"><input type="checkbox" class="h-4 w-4 rounded text-indigo-600"> Mipec</label>
+                        </div>
+                    </div>
+                    <div class="border-t pt-4">
+                        <p class="font-semibold text-sm mb-2">Áp dụng cho</p>
+                        <input type="text" placeholder="Tìm kiếm và chọn tài xế hoặc phương tiện..." class="w-full p-2 border rounded-lg">
+                    </div>
+                    <div class="pt-4 flex justify-end gap-3">
+                        <button type="button" id="cancelAddPolicyBtn" class="px-6 py-2 rounded-lg bg-gray-100 text-gray-700 font-semibold hover:bg-gray-200">Hủy</button>
+                        <button type="submit" class="px-6 py-2 rounded-lg bg-indigo-600 text-white font-semibold shadow hover:bg-indigo-700">Tạo chính sách</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -273,78 +401,68 @@
     document.addEventListener('DOMContentLoaded', function() {
         // --- GEMINI API HELPER ---
         async function callGeminiAPI(prompt) {
-            // This is a mock function. In a real application, you would make a fetch call to the Gemini API.
-            // Replace this with your actual API call.
             console.log("Calling Gemini API with prompt:", prompt);
-            
-            // Mock API call with a delay to simulate network latency
             await new Promise(resolve => setTimeout(resolve, 1500));
-
-            // Mock responses based on prompt keywords
             if (prompt.includes("tóm tắt báo cáo chi tiêu")) {
-                return `
-                    <h4 class="font-bold text-lg mb-2">Tóm tắt Báo cáo Chi tiêu Tháng 6/2025</h4>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li><b>Xu hướng chính:</b> Tổng chi tiêu tháng 6 là <strong>125,340,000 ₫</strong>, tăng 13% so với tháng 5. Mức tăng chủ yếu đến từ đội Sales do có nhiều chuyến công tác xa.</li>
-                        <li><b>Điểm bất thường:</b> Giao dịch của tài xế <strong>Lê Minh Cường</strong> vào ngày 25/06 có giá trị cao bất thường (2,500,000 ₫), vượt 150% so với mức trung bình. Cần xem xét lại tính hợp lệ.</li>
-                        <li><b>Đề xuất tối ưu:</b> Chi tiêu vào cuối tuần chiếm 20% tổng chi phí. Cân nhắc giới hạn chính sách chi tiêu, không cho phép đổ xăng vào Chủ Nhật để có thể tiết kiệm khoảng <strong>15,000,000 ₫/tháng</strong>.</li>
-                    </ul>
-                `;
+                return `<h4 class="font-bold text-lg mb-2">Tóm tắt Báo cáo Chi tiêu Tháng 6/2025</h4><ul class="list-disc list-inside space-y-2 text-gray-700"><li><b>Xu hướng chính:</b> Tổng chi tiêu tháng 6 là <strong>125,340,000 ₫</strong>, tăng 13% so với tháng 5. Mức tăng chủ yếu đến từ đội Sales do có nhiều chuyến công tác xa.</li><li><b>Điểm bất thường:</b> Giao dịch của tài xế <strong>Lê Minh Cường</strong> vào ngày 25/06 có giá trị cao bất thường (2,500,000 ₫), vượt 150% so với mức trung bình. Cần xem xét lại tính hợp lệ.</li><li><b>Đề xuất tối ưu:</b> Chi tiêu vào cuối tuần chiếm 20% tổng chi phí. Cân nhắc giới hạn chính sách chi tiêu, không cho phép đổ xăng vào Chủ Nhật để có thể tiết kiệm khoảng <strong>15,000,000 ₫/tháng</strong>.</li></ul>`;
             } else if (prompt.includes("Gợi ý lộ trình")) {
-                 return `
-                    <h4 class="font-bold text-lg mb-2">Lộ trình tối ưu:</h4>
-                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                        <li>Đi theo đường Trường Sơn, rẽ trái vào Hoàng Văn Thụ.</li>
-                        <li>Đi thẳng qua ngã tư Phú Nhuận, vào đường Phan Đình Phùng.</li>
-                        <li><strong>Ghé vào trạm xăng Petrolimex số 25 (cách 200m bên phải) để đổ xăng.</strong></li>
-                        <li>Tiếp tục đi thẳng Hai Bà Trưng, rẽ phải vào Lê Thánh Tôn để đến Chợ Bến Thành.</li>
-                    </ol>
-                    <p class="text-sm text-indigo-600 font-semibold mt-4">Chúc bạn có một chuyến đi an toàn!</p>
-                `;
+                 return `<h4 class="font-bold text-lg mb-2">Lộ trình tối ưu:</h4><ol class="list-decimal list-inside space-y-2 text-gray-700"><li>Đi theo đường Trường Sơn, rẽ trái vào Hoàng Văn Thụ.</li><li>Đi thẳng qua ngã tư Phú Nhuận, vào đường Phan Đình Phùng.</li><li><strong>Ghé vào trạm xăng Petrolimex số 25 (cách 200m bên phải) để đổ xăng.</strong></li><li>Tiếp tục đi thẳng Hai Bà Trưng, rẽ phải vào Lê Thánh Tôn để đến Chợ Bến Thành.</li></ol><p class="text-sm text-indigo-600 font-semibold mt-4">Chúc bạn có một chuyến đi an toàn!</p>`;
             }
             return "Xin lỗi, tôi chưa thể xử lý yêu cầu này.";
         }
         
-        // --- ADMIN AI MODAL SCRIPT ---
-        const adminAIModal = document.getElementById('adminAIModal');
+        // --- MODAL HANDLERS ---
+        function setupModal(modalId, openBtnId, closeBtnId, cancelBtnId = null, formId = null) {
+            const modal = document.getElementById(modalId);
+            const openBtn = document.getElementById(openBtnId);
+            const closeBtn = document.getElementById(closeBtnId);
+            const cancelBtn = cancelBtnId ? document.getElementById(cancelBtnId) : null;
+            const form = formId ? document.getElementById(formId) : null;
+
+            if (openBtn) openBtn.addEventListener('click', () => modal.classList.remove('hidden'));
+            if (closeBtn) closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            if (cancelBtn) cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));
+            if (form) form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                modal.classList.add('hidden');
+            });
+        }
+
+        setupModal('adminAIModal', null, 'closeAdminAIModal'); // Opened programmatically
+        setupModal('driverAIModal', 'suggestRouteBtn', 'closeDriverAIModal');
+        setupModal('topUpModal', 'topUpBtn', 'closeTopUpModal');
+        setupModal('addDriverModal', 'openAddDriverModal', 'closeAddDriverModal', 'cancelAddDriverBtn', 'addDriverForm');
+        setupModal('addPolicyModal', 'openAddPolicyModal', 'closeAddPolicyModal', 'cancelAddPolicyBtn', 'addPolicyForm');
+
+        // --- AI LOGIC ---
         const analyzeWithAIBtn = document.getElementById('analyzeWithAIBtn');
-        const closeAdminAIModalBtn = document.getElementById('closeAdminAIModal');
         const adminAIResult = document.getElementById('adminAIResult');
-
-        analyzeWithAIBtn.addEventListener('click', async () => {
-            adminAIModal.classList.remove('hidden');
-            adminAIResult.innerHTML = '<div class="spinner"></div>';
-            const prompt = "Hãy tóm tắt báo cáo chi tiêu này và đưa ra nhận xét, phát hiện bất thường và đề xuất tối ưu: [Dữ liệu báo cáo chi tiêu tháng 6/2025]";
-            const result = await callGeminiAPI(prompt);
-            adminAIResult.innerHTML = result;
-        });
-        closeAdminAIModalBtn.addEventListener('click', () => adminAIModal.classList.add('hidden'));
-
-        // --- DRIVER AI MODAL SCRIPT ---
-        const driverAIModal = document.getElementById('driverAIModal');
-        const suggestRouteBtn = document.getElementById('suggestRouteBtn');
-        const closeDriverAIModalBtn = document.getElementById('closeDriverAIModal');
+        if(analyzeWithAIBtn) {
+            analyzeWithAIBtn.addEventListener('click', async () => {
+                document.getElementById('adminAIModal').classList.remove('hidden');
+                adminAIResult.innerHTML = '<div class="spinner"></div>';
+                const prompt = "Hãy tóm tắt báo cáo chi tiêu này và đưa ra nhận xét, phát hiện bất thường và đề xuất tối ưu: [Dữ liệu báo cáo chi tiêu tháng 6/2025]";
+                const result = await callGeminiAPI(prompt);
+                adminAIResult.innerHTML = result;
+            });
+        }
+        
         const getRouteSuggestionBtn = document.getElementById('getRouteSuggestionBtn');
         const driverAIResult = document.getElementById('driverAIResult');
-
-        suggestRouteBtn.addEventListener('click', () => {
-            driverAIModal.classList.remove('hidden');
-            driverAIResult.innerHTML = ''; // Clear previous results
-        });
-        closeDriverAIModalBtn.addEventListener('click', () => driverAIModal.classList.add('hidden'));
-        getRouteSuggestionBtn.addEventListener('click', async () => {
-            const start = document.getElementById('startPoint').value;
-            const end = document.getElementById('endPoint').value;
-            if (!start || !end) {
-                driverAIResult.innerHTML = '<p class="text-red-500">Vui lòng nhập cả điểm đi và điểm đến.</p>';
-                return;
-            }
-            driverAIResult.innerHTML = '<div class="spinner"></div>';
-            const prompt = `Gợi ý lộ trình đi từ '${start}' đến '${end}' và ghé vào một trạm xăng PSI trên đường.`;
-            const result = await callGeminiAPI(prompt);
-            driverAIResult.innerHTML = result;
-        });
-
+        if(getRouteSuggestionBtn) {
+            getRouteSuggestionBtn.addEventListener('click', async () => {
+                const start = document.getElementById('startPoint').value;
+                const end = document.getElementById('endPoint').value;
+                if (!start || !end) {
+                    driverAIResult.innerHTML = '<p class="text-red-500">Vui lòng nhập cả điểm đi và điểm đến.</p>';
+                    return;
+                }
+                driverAIResult.innerHTML = '<div class="spinner"></div>';
+                const prompt = `Gợi ý lộ trình đi từ '${start}' đến '${end}' và ghé vào một trạm xăng PSI trên đường.`;
+                const result = await callGeminiAPI(prompt);
+                driverAIResult.innerHTML = result;
+            });
+        }
 
         // --- ADMIN WEB APP SCRIPT ---
         const sidebarLinks = document.querySelectorAll('.sidebar-link');
@@ -363,6 +481,18 @@
             });
         });
         
+        // Fleet Management Tabs
+        const fleetTabs = document.querySelectorAll('.fleet-tab');
+        const fleetTabContents = document.querySelectorAll('.fleet-tab-content');
+        fleetTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                fleetTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                fleetTabContents.forEach(c => c.classList.add('hidden'));
+                document.getElementById(tab.dataset.target).classList.remove('hidden');
+            });
+        });
+
         // --- MOBILE APP SCRIPT ---
         const mobileScreens = document.querySelectorAll('.mobile-screen');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
@@ -371,82 +501,115 @@
         function showMobileScreen(screenId) {
             mobileScreens.forEach(screen => screen.classList.add('hidden'));
             const targetScreen = document.getElementById(screenId);
-            if(targetScreen) {
-                 targetScreen.classList.remove('hidden');
-            }
-
+            if(targetScreen) targetScreen.classList.remove('hidden');
+            
             mobileNavLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('data-target') === screenId) {
                     link.classList.add('active');
                 }
             });
-
-            // Hide nav for full-screen views
-            if (['driverScanView', 'driverConfirmView', 'driverSuccessView'].includes(screenId)) {
-                mobileNav.classList.add('hidden');
-            } else {
-                mobileNav.classList.remove('hidden');
-            }
+            
+            const isFullScreen = ['driverScanView', 'driverConfirmView', 'driverSuccessView', 'merchantQRView'].includes(screenId);
+            if(mobileNav) mobileNav.style.display = isFullScreen ? 'none' : 'flex';
         }
 
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = link.getAttribute('data-target');
-                showMobileScreen(targetId);
+                showMobileScreen(link.getAttribute('data-target'));
             });
         });
-
+        
         // Payment Flow Logic
-        document.getElementById('scanQrBtn').addEventListener('click', () => showMobileScreen('driverScanView'));
-        document.getElementById('cancelScanBtn').addEventListener('click', () => showMobileScreen('driverHomeView'));
-        document.getElementById('simulateScanBtn').addEventListener('click', () => showMobileScreen('driverConfirmView'));
-        document.getElementById('cancelPaymentBtn').addEventListener('click', () => showMobileScreen('driverHomeView'));
-        document.getElementById('confirmPaymentBtn').addEventListener('click', () => showMobileScreen('driverSuccessView'));
-        document.getElementById('doneBtn').addEventListener('click', () => showMobileScreen('driverHomeView'));
+        const scanQrBtn = document.getElementById('scanQrBtn');
+        if (scanQrBtn) scanQrBtn.addEventListener('click', () => showMobileScreen('driverScanView'));
+        const cancelScanBtn = document.getElementById('cancelScanBtn');
+        if (cancelScanBtn) cancelScanBtn.addEventListener('click', () => showMobileScreen('driverHomeView'));
+        const simulateScanBtn = document.getElementById('simulateScanBtn');
+        if (simulateScanBtn) simulateScanBtn.addEventListener('click', () => showMobileScreen('driverConfirmView'));
+        const cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
+        if (cancelPaymentBtn) cancelPaymentBtn.addEventListener('click', () => showMobileScreen('driverHomeView'));
+        const confirmPaymentBtn = document.getElementById('confirmPaymentBtn');
+        if (confirmPaymentBtn) confirmPaymentBtn.addEventListener('click', () => showMobileScreen('driverSuccessView'));
+        const doneBtn = document.getElementById('doneBtn');
+        if (doneBtn) doneBtn.addEventListener('click', () => showMobileScreen('driverHomeView'));
+
+
+        // --- MERCHANT APP LOGIC ---
+        const merchantAmountDisplay = document.getElementById('merchantAmountDisplay');
+        let currentAmount = "0";
+
+        document.querySelectorAll('.numpad-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentAmount === "0") currentAmount = "";
+                if (currentAmount.length < 9) { // Limit input length
+                    currentAmount += button.innerText;
+                }
+                updateAmountDisplay();
+            });
+        });
+        
+        const merchantClearBtn = document.getElementById('merchantClearBtn');
+        if(merchantClearBtn) merchantClearBtn.addEventListener('click', () => {
+            currentAmount = "0";
+            updateAmountDisplay();
+        });
+        
+        const merchantBackspaceBtn = document.getElementById('merchantBackspaceBtn');
+        if(merchantBackspaceBtn) merchantBackspaceBtn.addEventListener('click', () => {
+            currentAmount = currentAmount.slice(0, -1);
+            if (currentAmount === "") currentAmount = "0";
+            updateAmountDisplay();
+        });
+
+        function updateAmountDisplay() {
+            if(merchantAmountDisplay){
+                const formattedAmount = new Intl.NumberFormat('vi-VN').format(currentAmount);
+                merchantAmountDisplay.innerHTML = `${formattedAmount}<span class="text-3xl">₫</span>`;
+            }
+        }
+        
+        const generateQRBtn = document.getElementById('generateQRBtn');
+        if(generateQRBtn) generateQRBtn.addEventListener('click', () => {
+            if (currentAmount !== "0") {
+                const qrAmountDisplay = document.getElementById('qrAmountDisplay');
+                if(qrAmountDisplay) qrAmountDisplay.innerText = merchantAmountDisplay.innerText;
+                showMobileScreen('merchantQRView');
+            }
+        });
+        
+        const closeQRBtn = document.getElementById('closeQRBtn');
+        if(closeQRBtn) closeQRBtn.addEventListener('click', () => showMobileScreen('merchantNumpadView'));
 
         // --- GLOBAL VIEW TOGGLE SCRIPT ---
-        const adminView = document.getElementById('adminView');
-        const driverView = document.getElementById('driverView');
-        const showAdminBtn = document.getElementById('showAdminBtn');
-        const showDriverBtn = document.getElementById('showDriverBtn');
+        const mainToggleBtns = document.querySelectorAll('.main-toggle-btn');
+        const mainAppViews = document.querySelectorAll('.main-app-view');
 
-        showAdminBtn.addEventListener('click', () => {
-            adminView.style.display = 'block';
-            driverView.style.display = 'none';
-            showAdminBtn.classList.add('bg-indigo-600', 'text-white');
-            showAdminBtn.classList.remove('text-gray-600');
-            showDriverBtn.classList.remove('bg-indigo-600', 'text-white');
-            showDriverBtn.classList.add('text-gray-600');
+        mainToggleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                mainToggleBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                mainAppViews.forEach(view => view.style.display = 'none');
+                
+                if (btn.id === 'showAdminBtn') document.getElementById('adminView').style.display = 'block';
+                if (btn.id === 'showDriverBtn') document.getElementById('driverView').style.display = 'flex';
+                if (btn.id === 'showMerchantBtn') document.getElementById('merchantView').style.display = 'flex';
+            });
         });
-
-        showDriverBtn.addEventListener('click', () => {
-            adminView.style.display = 'none';
-            driverView.style.display = 'flex';
-            showDriverBtn.classList.add('bg-indigo-600', 'text-white');
-            showDriverBtn.classList.remove('text-gray-600');
-            showAdminBtn.classList.remove('bg-indigo-600', 'text-white');
-            showAdminBtn.classList.add('text-gray-600');
-        });
-
+        
         // --- CHART.JS SCRIPT ---
         const ctxElement = document.getElementById('spendingChart');
         if (ctxElement) {
             const ctx = ctxElement.getContext('2d');
-            const spendingChart = new Chart(ctx, {
+            new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Đội Sales', 'Đội Giao hàng', 'Hành chính', 'Khác'],
                     datasets: [{
                         label: 'Chi tiêu theo bộ phận',
                         data: [55, 25, 15, 5],
-                        backgroundColor: [
-                            'rgba(79, 70, 229, 0.8)', // indigo
-                            'rgba(5, 150, 105, 0.8)', // emerald
-                            'rgba(245, 158, 11, 0.8)', // amber
-                            'rgba(107, 114, 128, 0.8)' // gray
-                        ],
+                        backgroundColor: ['rgba(79, 70, 229, 0.8)', 'rgba(5, 150, 105, 0.8)', 'rgba(245, 158, 11, 0.8)', 'rgba(107, 114, 128, 0.8)'],
                         borderColor: '#fff',
                         borderWidth: 2
                     }]
@@ -454,17 +617,14 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                        }
-                    }
+                    plugins: { legend: { position: 'right' } }
                 }
             });
         }
         
-        // Initial Admin View setup
-        document.getElementById('dashboardView').style.display = 'block';
+        // Initial setup
+        const dashboardView = document.getElementById('dashboardView');
+        if(dashboardView) dashboardView.style.display = 'block';
     });
     </script>
 </body>
